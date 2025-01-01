@@ -1,15 +1,14 @@
-// Elements from the HTML
+
 const newsCategory = document.getElementById('category');
 const preferencesForm = document.getElementById('preferences-form');
 const newsContainer = document.getElementById('news-articles');
 const loader = document.getElementById('loader');
 const greeting = document.getElementById('greeting');
 
-// NewsAPI details
-const apiKey = '32d5e22c99344a55b0d1c2754ffb4858'; // Replace with your valid API key
+const apiKey = '32d5e22c99344a55b0d1c2754ffb4858'; 
 const apiUrl = 'https://newsapi.org/v2/top-headlines';
 
-// Dynamic greeting based on time of day
+
 const hours = new Date().getHours();
 if (hours < 12) {
     greeting.innerHTML = "Good Morning!";
@@ -19,18 +18,17 @@ if (hours < 12) {
     greeting.innerHTML = "Good Evening!";
 }
 
-// Event listener for the preferences form
 preferencesForm.addEventListener('submit', fetchNews);
 
-// Fetch and display news articles based on the selected category
+
 function fetchNews(event) {
-    event.preventDefault(); // Prevent form submission from reloading the page
+    event.preventDefault(); 
     const category = newsCategory.value || 'general';
     const url = `${apiUrl}?country=us&category=${category}&apiKey=${apiKey}`;
 
-    // Show loader and clear any previous news
+
     loader.classList.remove('hidden');
-    newsContainer.innerHTML = ''; // Clear previous news articles
+    newsContainer.innerHTML = ''; 
 
     fetch(url)
         .then(response => {
@@ -40,7 +38,7 @@ function fetchNews(event) {
             return response.json();
         })
         .then(data => {
-            loader.classList.add('hidden'); // Hide loader
+            loader.classList.add('hidden'); 
             if (data.status === 'ok' && data.articles.length > 0) {
                 displayNews(data.articles);
             } else {
@@ -48,15 +46,15 @@ function fetchNews(event) {
             }
         })
         .catch(error => {
-            loader.classList.add('hidden'); // Hide loader
+            loader.classList.add('hidden'); 
             newsContainer.innerHTML = '<p>Something went wrong. Please try again later.</p>';
             console.error('Fetch error:', error);
         });
 }
 
-// Display fetched news articles
+
 function displayNews(articles) {
-    // Filter out any articles that are marked as "removed" or missing necessary data
+    
     const validArticles = articles.filter(article => {
         return article.title && article.description && article.url 
             && article.title.trim() !== '' && article.description.trim() !== ''
@@ -66,10 +64,10 @@ function displayNews(articles) {
 
     if (validArticles.length === 0) {
         newsContainer.innerHTML = '<p>No valid news articles found for this category.</p>';
-        return; // Exit if no valid articles are found
+        return; 
     }
 
-    // Create and append new articles to the container
+    
     validArticles.forEach(article => {
         const articleEle = document.createElement('div');
         articleEle.classList.add('article');
@@ -80,7 +78,7 @@ function displayNews(articles) {
             <a href="${article.url}" target="_blank">Read More</a>
         `;
 
-        // Add toggle behavior for expanding/collapsing article description
+        
         articleEle.addEventListener('click', () => {
             articleEle.classList.toggle('expanded');
         });
