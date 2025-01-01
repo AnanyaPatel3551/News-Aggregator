@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive AI News Aggregator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><b><i id="greeting">Welcome ! 📰</i></b></h1>
+            <p><h3>Stay Informed, Your Way</h3></p>
+           
+        </div>
+    </header>
+
+    <main>
+        <section class="preferences">
+            <h2>Choose your NEWS Interests</h2>
+            <form id="preferences-form">
+                <label for="category"><b>Select a category:</b></label>
+                <select name="category" id="category">
+                    <option value="technology">Technology</option>
+                    <option value="sports">Sports</option>
+                    <option value="health">Health</option>
+                    <option value="business">Business</option>
+                </select>
+                <button type="submit" class="button">Get the News...</button>
+            </form>
+        </section>
+
+        <section id="news-articles">
+          
+        </section>
+    </main>
+
+    <div id="loader" class="hidden"></div>
+
+    <footer>
+        <p>Thanks to <b>NewsAPI</b> for bringing the world’s news to your fingertips. 🌍</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
